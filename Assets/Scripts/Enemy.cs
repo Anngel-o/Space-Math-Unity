@@ -39,10 +39,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public float spawnPositionShootX = -0.5f;
     void Shoot()
     {
-        // Crea un nuevo proyectil en la posición de la nave enemiga
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        // Calcula la posición de inicio del proyectil más adelante desde la nave enemiga
+        Vector3 spawnPosition = transform.position + new Vector3(0, spawnPositionShootX, 0);
+
+        // Crea un nuevo proyectil en la posición calculada
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
 
         // Agrega una velocidad hacia abajo al proyectil
         Rigidbody2D bulletRB = bullet.GetComponent<Rigidbody2D>();
