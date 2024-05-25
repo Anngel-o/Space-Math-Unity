@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -12,17 +13,19 @@ public class Player : MonoBehaviour
     public float detectionRange = 5f;
     public Life life;
     public float damage;
-    // Start is called before the first frame update
+    private Enemy currentTarget;
+
     void Start()
     {
         rbPlayer = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float movement = Input.GetAxisRaw("Horizontal");
         rbPlayer.velocity = new Vector2(movement * velocity, rbPlayer.velocity.y);
+
+        DetectEnemy();
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -36,21 +39,46 @@ public class Player : MonoBehaviour
 
     public void Shoot(Vector2 targetPosition)
     {
-        // Instanciar proyectil
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        
-        // Calcular dirección hacia el objetivo
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-        
-        // Aplicar fuerza al proyectil
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         rb.velocity = direction * shootForce;
     }
 
     private void OnDrawGizmosSelected()
     {
-        // Dibuja un círculo para visualizar el rango de detección
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+    void DetectEnemy()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRange);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                currentTarget = hit.GetComponent<Enemy>();
+                return;
+            }
+        }
+        currentTarget = null;
+    }
+
+    public void SubmitAnswer(string answer)
+    {
+        if (currentTarget != null)
+        {
+            int parsedAnswer;
+            if (int.TryParse(answer, out parsedAnswer) && parsedAnswer == currentTarget.correctAnswer)
+            {
+                Shoot(currentTarget.transform.position);
+                currentTarget = null;
+            }
+            else
+            {
+                Debug.Log("Respuesta incorrecta");
+            }
+        }
     }
 }

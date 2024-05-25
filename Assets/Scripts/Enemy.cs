@@ -1,58 +1,138 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 5f; // Velocidad de movimiento horizontal de la nave enemiga
-    public GameObject player; // Referencia al objeto del jugador
-    public GameObject bulletPrefab; // Prefab del proyectil
-    public float shootingInterval = 2f; // Intervalo de tiempo entre disparos
-    public float bulletSpeed = 10f; // Velocidad del proyectil
-    public float bulletLifetime = 2f; // Tiempo de vida del proyectil
+    public float speed = 5f;
+    public GameObject player;
+    public GameObject bulletPrefab;
+    public float shootingInterval = 2f;
+    public float bulletSpeed = 10f;
+    public float bulletLifetime = 2f;
 
-    private float timer; // Temporizador para controlar el disparo
+    private float timer;
+
+    public int multiplicand;
+    public int multiplier;
+    public int correctAnswer;
+    public List<int> possibleAnswers;
+
+    public Button answerButton1;
+    public Button answerButton2;
+    public Button answerButton3;
+
+    public TMP_Text multiplicationTextTMP; // TextMeshPro Text
 
     void Start()
     {
-        timer = shootingInterval; // Iniciar el temporizador
+        timer = shootingInterval;
+        GenerateMultiplication();
+        GeneratePossibleAnswers();
+        UpdateMultiplicationUI();
     }
 
     void Update()
     {
-        // Obtén las coordenadas horizontales del jugador y de la nave enemiga
         float playerX = player.transform.position.x;
         float enemyX = transform.position.x;
 
-        // Calcula la dirección hacia la que la nave enemiga debe moverse para seguir al jugador
         float directionX = Mathf.Clamp(playerX - enemyX + 0.25f, -1f, 1f);
-
-        // Mueve la nave enemiga horizontalmente
         transform.Translate(new Vector3(directionX, 0, 0) * speed * Time.deltaTime);
 
-        // Disparo
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            Shoot(); // Llama a la función de disparo
-            timer = shootingInterval; // Reinicia el temporizador
+            Shoot();
+            timer = shootingInterval;
+        }
+    }
+
+    void GenerateMultiplication()
+    {
+        multiplicand = Random.Range(1, 11);
+        multiplier = Random.Range(1, 11);
+        correctAnswer = multiplicand * multiplier;
+    }
+
+    void GeneratePossibleAnswers()
+    {
+        possibleAnswers = new List<int> { correctAnswer };
+        while (possibleAnswers.Count < 3)
+        {
+            int wrongAnswer = Random.Range(1, 101);
+            if (!possibleAnswers.Contains(wrongAnswer))
+            {
+                possibleAnswers.Add(wrongAnswer);
+            }
+        }
+        Shuffle(possibleAnswers);
+    }
+
+    void Shuffle(List<int> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+    }
+
+    void UpdateMultiplicationUI()
+    {
+        // Usa el objeto de texto referenciado directamente
+        if (multiplicationTextTMP != null)
+        {
+            multiplicationTextTMP.text = $"{multiplicand} x {multiplier}";
+        }
+        else
+        {
+            Debug.LogError("MultiplicationTextTMP no asignado.");
+        }
+
+        // Verifica que los botones están asignados
+        if (answerButton1 == null || answerButton2 == null || answerButton3 == null)
+        {
+            Debug.LogError("Botones de respuesta no asignados en el Inspector.");
+            return;
+        }
+
+        Button[] buttons = { answerButton1, answerButton2, answerButton3 };
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (buttons[i] != null)
+            {
+                TMP_Text buttonText = buttons[i].GetComponentInChildren<TMP_Text>();
+                if (buttonText != null)
+                {
+                    buttonText.text = possibleAnswers[i].ToString();
+                }
+                else
+                {
+                    Debug.LogError("El botón no tiene un componente TMP_Text.");
+                }
+                int index = i; // Para evitar el problema del cierre sobre la variable en el loop
+                buttons[i].onClick.RemoveAllListeners(); // Limpiar los listeners anteriores
+                buttons[i].onClick.AddListener(() => FindObjectOfType<Player>().SubmitAnswer(buttonText.text));
+            }
+            else
+            {
+                Debug.LogError($"Button {i + 1} no asignado.");
+            }
         }
     }
 
     public float spawnPositionShootX = -0.5f;
     void Shoot()
     {
-        // Calcula la posición de inicio del proyectil más adelante desde la nave enemiga
         Vector3 spawnPosition = transform.position + new Vector3(0, spawnPositionShootX, 0);
-
-        // Crea un nuevo proyectil en la posición calculada
         GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
-
-        // Agrega una velocidad hacia abajo al proyectil
         Rigidbody2D bulletRB = bullet.GetComponent<Rigidbody2D>();
         bulletRB.velocity = Vector2.down * bulletSpeed;
-
-        // Destruye el proyectil después de un cierto tiempo para liberar memoria
         Destroy(bullet, bulletLifetime);
     }
 }

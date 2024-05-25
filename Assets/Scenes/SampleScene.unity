@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 361634644}
   - component: {fileID: 361634643}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PossibleAnswer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1140,7 +1140,7 @@ GameObject:
   - component: {fileID: 880770203}
   - component: {fileID: 880770202}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: PossibleAnswer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1328,7 +1328,7 @@ GameObject:
   - component: {fileID: 1377231601}
   - component: {fileID: 1377231600}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MultiplicationText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1673,7 +1673,7 @@ GameObject:
   - component: {fileID: 1631755279}
   - component: {fileID: 1631755278}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: PossibleAnswer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1884,7 +1884,15 @@ MonoBehaviour:
   shootingInterval: 2.5
   bulletSpeed: 6
   bulletLifetime: 1
-  spawnPositionShootX: -1
+  multiplicand: 0
+  multiplier: 0
+  correctAnswer: 0
+  possibleAnswers: 
+  answerButton1: {fileID: 361634643}
+  answerButton2: {fileID: 880770202}
+  answerButton3: {fileID: 1631755278}
+  multiplicationTextTMP: {fileID: 1377231600}
+  spawnPositionShootX: -0.5
 --- !u!1 &1818981443
 GameObject:
   m_ObjectHideFlags: 0
