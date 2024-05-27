@@ -1,10 +1,18 @@
 # **Space Math: Cálculos Cósmicos** 
 
-**Space Math: Cálculos Cósmicos** es un juego educativo que combina la emoción del clásico Space Shooter con el desafío intelectual de resolver problemas matemáticos. Diseñado para ser una experiencia de aprendizaje divertida y práctica, el juego está orientado a mejorar las habilidades numéricas a través del aprendizaje por repetición y la gamificación.
+**Space Math: Cálculos Cósmicos** es un juego educativo diseñado para entretener y ser una experiencia de aprendizaje divertida y práctica en el ámbito de las matemáticas. 
+Con una mezcla de exploración espacial y desafíos matemáticos, **Space Math: Cálculos Cósmicos** ofrece una forma de mejorar las habilidades numéricas a través del aprendizaje por repetición
 
 ## **Descripción del Proyecto**
 
-En **Space Math: Cálculos Cósmicos**, los jugadores asumen el rol de Alex, el mejor astronauta y matemático del planeta Tierra, que debe defender nuestro hogar de una invasión alienígena. Las naves enemigas solo pueden ser destruidas resolviendo problemas matemáticos, lo que convierte cada batalla en una oportunidad para aprender y practicar matemáticas.
+En Space Math: Cálculos Cósmicos, el jugador asume el rol de Alex, un astronauta y matemático que pilota una nave espacial. El objetivo es defender la Tierra
+resolviendo problemas matemáticos mientras se enfrenta a hordas de naves
+enemigas. Cada vez que el jugador responde correctamente a una multiplicación, la
+nave enemiga correspondiente será destruida. Si el jugador responde
+incorrectamente, su nave se atrofia temporalmente, dejándola vulnerable. El juego
+continúa en un loop, introduciendo nuevas naves enemigas asociadas con problemas
+matemáticos hasta que el jugador haya resuelto todas las tablas de multiplicar del 1
+al 10.
 
 ## **Objetivos del Juego**
 
@@ -24,7 +32,19 @@ En **Space Math: Cálculos Cósmicos**, los jugadores asumen el rol de Alex, el 
 
 ## **Historia y Trama**
 
-En un futuro distante, la humanidad se enfrenta a una amenaza galáctica. Alex, el astronauta y matemático más talentoso, es seleccionado para defender la Tierra. Su misión es resolver los enigmas matemáticos que protegen a las naves alienígenas y detener la invasión. Cada nave enemiga representa un problema matemático que Alex debe resolver para salvar el planeta.
+En un futuro distante, la humanidad se enfrenta a una amenaza sin precedentes.
+Naves alienígenas aparecen de lo más recóndito del espacio exterior con un sólo
+propósito; apoderarse de los recursos del planeta Tierra y esclavizar a la
+humanidad. El Departamento de Amenazas Intergalácticas al percatarse de la
+situación, decide enviar a su mejor astronauta; Alex, quien además poseé una
+habilidad innata para resolver enigmas y acertijos matemáticos. Alex se embarca
+en esta peligrosa, pero emocionante misión, donde debe pilotar su nave y
+mantenerla con el menor daño posible. Las naves enemigas están protegidas con
+un escudo que solo se logra penetrar resolviendo problemas matemáticos. Sin
+embargo, responder un problema de manera errónea resulta en una
+momentánea atrofia de la nave de Alex. Aún así Alex está decidido a proteger su
+amado planeta y demostrar que el conocimiento y la habilidad pueden superar
+cualquier obstáculo.
 
 ## **Características**
 
