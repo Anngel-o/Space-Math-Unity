@@ -118,6 +118,10 @@ public class Enemy : MonoBehaviour
                 int index = i; // Para evitar el problema del cierre sobre la variable en el loop
                 buttons[i].onClick.RemoveAllListeners(); // Limpiar los listeners anteriores
                 buttons[i].onClick.AddListener(() => FindObjectOfType<Player>().SubmitAnswer(buttonText.text));
+                // if (FindObjectOfType<Player>().SubmitAnswer(buttonText.text) == correctAnswer.ToString)
+                // {
+                //     Player.Shoot();
+                // }
             }
             else
             {

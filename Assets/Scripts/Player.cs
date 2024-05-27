@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public float detectionRange = 5f;
     public Life life;
     public float damage;
-    private Enemy currentTarget;
+    private Enemy enemyCurrentTarget;
 
     void Start()
     {
@@ -58,22 +58,22 @@ public class Player : MonoBehaviour
         {
             if (hit.CompareTag("Enemy"))
             {
-                currentTarget = hit.GetComponent<Enemy>();
+                enemyCurrentTarget = hit.GetComponent<Enemy>();
                 return;
             }
         }
-        currentTarget = null;
+        enemyCurrentTarget = null;
     }
 
     public void SubmitAnswer(string answer)
     {
-        if (currentTarget != null)
+        if (enemyCurrentTarget != null)
         {
             int parsedAnswer;
-            if (int.TryParse(answer, out parsedAnswer) && parsedAnswer == currentTarget.correctAnswer)
+            if (int.TryParse(answer, out parsedAnswer) && parsedAnswer == enemyCurrentTarget.correctAnswer)
             {
-                Shoot(currentTarget.transform.position);
-                currentTarget = null;
+                Shoot(enemyCurrentTarget.transform.position);
+                enemyCurrentTarget = null;
             }
             else
             {
