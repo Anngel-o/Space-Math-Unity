@@ -48,7 +48,7 @@ cualquier obstáculo.
 
 ## **Características**
 
-- **Estilo Artístico:** Gráficos de pixel art inspirados en los clásicos juegos de disparos espaciales.
+- **Estilo Artístico:** Gráficos de pixel art evocando un estilo de juego retro y nostálgico.
 
 - **Música y Sonido:** Banda sonora enérgica y efectos de sonido que refuerzan las acciones del jugador, creando una atmósfera envolvente y estimulante.
 
